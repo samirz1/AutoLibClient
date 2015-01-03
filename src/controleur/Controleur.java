@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.MyBoolean;
+
+import com.sun.jersey.api.client.Client;
+
 
 @WebServlet("/controleur")
 public class Controleur extends HttpServlet{
@@ -23,9 +27,17 @@ public class Controleur extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");// on récupére le type d'action
 		if (action != null && action.equals("connexionClient")) {
-			//MyBoolean success = Client.create().resource("http://localhost:8080/TP2WebService/serviceOeuvre/retirer/" + selectOeuvre).get(MyBoolean.class);
+			String nomClient = request.getParameter("nomClient");
+			MyBoolean success = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceClient/connexionClient/" + nomClient).get(MyBoolean.class);
+			if(success.isB()){
+				System.out.println("Vrai");
+			}
+			else {
+			System.out.println("False");
+			}
+			request.setAttribute("message", success.isB());
 		}else{
-			System.out.println("PAGE NON TROUVER");
+			System.out.println("PAGE NON TROUVEE");
 		}
 	}	
 	

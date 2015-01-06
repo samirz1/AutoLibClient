@@ -1,0 +1,7 @@
+.classpath
+
+# Classes binaires ignorées
+build/
+
+Thumbs.db
+.settings/

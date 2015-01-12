@@ -28,5 +28,30 @@
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
 			Supprimer un client</button>
 	</form>
+	<form action="controleurVehicule?action=toutRechercher" method="POST">
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Consuslter la liste des vehicules</button>
+	</form>
+	<form action="controleurVehicule?action=modifier" method="POST">
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Modification d'un vehicule</button>
+	</form>
+	<form action="controleurVehicule?action=creation" method="POST">
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Creation d'un nouveau vehicule</button>
+	</form>
+	<form action="controleurVehicule?action=supprimer" method="POST">
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Supprimer un vehicule</button>
+	</form>
+	<form action="controleurVehicule?action=rechercher1" method="POST">
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Rechercher un vehicule</button>
+	</form>
 </body>
 </html>

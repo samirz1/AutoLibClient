@@ -18,6 +18,8 @@ public class Vehicule implements Serializable {
 	private Double latitude;
 	private Double longitude;
 	private Integer typeVehicule;
+	private Integer idBorne;
+	private Integer station;
 
 	// *******************************************
 	// CONSTRUCTEUR

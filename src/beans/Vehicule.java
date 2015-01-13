@@ -86,4 +86,22 @@ public class Vehicule implements Serializable {
 	public void setTypeVehicule(Integer typeVehicule) {
 		this.typeVehicule = typeVehicule;
 	}
+
+	public Integer getIdBorne() {
+		return idBorne;
+	}
+
+	public void setIdBorne(Integer idBorne) {
+		this.idBorne = idBorne;
+	}
+
+	public Integer getStation() {
+		return station;
+	}
+
+	public void setStation(Integer station) {
+		this.station = station;
+	}
+	
+	
 }

@@ -32,15 +32,20 @@ public class ControleurVehicule extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");// on récupére le type d'action
 		if (action != null && action.equals("creation")) {
-			Integer typeVehicule = Integer.parseInt(request.getParameter("typeVehicule"));
-			Integer station = Integer.parseInt(request.getParameter("station"));
-			Integer idBorne = Integer.parseInt(request.getParameter("idBorne"));
-			if(typeVehicule!=null && station!=null && idBorne!=null ){
+			if(request.getParameter("typeVehicule")!=null && request.getParameter("station")!=null
+					&& request.getParameter("idBorne")!=null ){
+				Integer typeVehicule = Integer.parseInt(request.getParameter("typeVehicule"));
+				Integer station = Integer.parseInt(request.getParameter("station"));
+				Integer idBorne = Integer.parseInt(request.getParameter("idBorne"));
 				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
 						+ "AutoLibWebService/serviceVehicule/creation/" + typeVehicule + "/" + station + "/" + idBorne).get(MyBoolean.class);
-				if(resultat.isB()) request.setAttribute("message", "Creation du véhicule effectué");
-				else request.setAttribute("message", "Echec de la creation du véhicule");
-			}			
+				if(resultat.isB()) {
+					request.setAttribute("message", "Creation du véhicule effectué");
+				}
+				else {
+					request.setAttribute("message", "Echec de la creation du véhicule");
+				}
+			}	
 			this.getServletContext().getRequestDispatcher( "/creationVehicule.jsp" ).forward( request, response );
 		}else if(action != null && action.equals("supprimer")){
 			String idVehicule = request.getParameter("selectedVehicule");
@@ -50,8 +55,8 @@ public class ControleurVehicule extends HttpServlet{
 				if(resultat.isB()) request.setAttribute("message", "Supression du véhicule effectué");
 				else request.setAttribute("message", "Echec de la suppression du véhicule");
 			}
-			List<beans.Vehicule> listeVehicule = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
-			request.setAttribute("listeVehicule", listeVehicule);	
+			List<beans.Vehicule> listeVehicules = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
+			request.setAttribute("listeVehicules", listeVehicules);	
 			this.getServletContext().getRequestDispatcher( "/supprimerVehicule.jsp" ).forward( request, response );
 		}else if(action != null && action.equals("rechercher1")){
 			String idVehicule = request.getParameter("selectedVehicule");
@@ -77,14 +82,16 @@ public class ControleurVehicule extends HttpServlet{
 			String etatBatterie = request.getParameter("etatBatterie");
 			String Disponibilite = request.getParameter("Disponibilite");
 			String type_vehicule = request.getParameter("type_vehicule");
-			MyBoolean resultat = Client.create().resource("http://localhost:8080/"
-					+ "AutoLibWebService/serviceVehicule/modifier/" + idVehicule+"/"+ancienIdBorne+"/"+nouveauIdBorne+
-					"/"+NouveauStation+"/"+RFID+"/"+etatBatterie+"/"+Disponibilite+"/"+type_vehicule).get(MyBoolean.class);
-			if(resultat.isB()) {
-				request.setAttribute("message", "Modification du véhicule effectué");
-			}
-			else {
-				request.setAttribute("message", "Echec de la modification du véhicule");
+			if(idVehicule !=null){
+				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
+						+ "AutoLibWebService/serviceVehicule/modifier/" + idVehicule+"/"+ancienIdBorne+"/"+nouveauIdBorne+
+						"/"+NouveauStation+"/"+RFID+"/"+etatBatterie+"/"+Disponibilite+"/"+type_vehicule).get(MyBoolean.class);
+				if(resultat.isB()) {
+					request.setAttribute("message", "Modification du véhicule effectué");
+				}
+				else {
+					request.setAttribute("message", "Echec de la modification du véhicule");
+				}
 			}
 			List<beans.Vehicule> listeVehicules = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
 			request.setAttribute("listeVehicules", listeVehicules);	

@@ -10,8 +10,8 @@
 	<form method="get" action="controleurVehicule">
 		<select class="dropdown-menu" role="menu" name="selectedVehicule">
 			<core:forEach items="${listeVehicules}" var="vehicule">²
-				<option value="<core:out value="${client.getIdVehicule()}"/>">
-					<core:out value="${client.getIdVehicule()}"/>
+				<option value="<core:out value="${vehicule.getIdVehicule()}"/>">
+					<core:out value="${vehicule.getIdVehicule()}"/>
 				</option>
 			</core:forEach>
 		</select>

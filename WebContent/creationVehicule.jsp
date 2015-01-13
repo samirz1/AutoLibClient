@@ -7,12 +7,12 @@
 </head>
 <body>
 	<h1>Creation d'un Vehicule</h1>
-	<form method="get" action="controleurClient">
+	<form method="get" action="controleurVehicule">
 		<label>Station </label>
 	    <input type="text" id="station" name="station" value="" size="5" maxlength="5" />
 	    <br />
 	    <label>idBorne </label>
-	    <input type="text" id="idBorne " name="idBorne " value="" size="20" maxlength="20" />
+	    <input type="text" id="idBorne" name="idBorne" value="" size="20" maxlength="20" />
 	    <br />
 	    <label>typeVehicule </label>
 	    <input type="text" id="typeVehicule" name="typeVehicule" value="" size="20" maxlength="20" />

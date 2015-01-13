@@ -53,5 +53,18 @@
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
 			Rechercher un vehicule</button>
 	</form>
+	
+	<form action="controleurStation">
+		<input type="hidden" name="action" value="liste" />
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Liste des stations</button>
+	</form>
+	<form action="controleurStation">
+		<input type="hidden" name="action" value="creation" />
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Ajouter une station</button>
+	</form>
 </body>
 </html>

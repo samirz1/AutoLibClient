@@ -1,0 +1,9 @@
+build/classes/controller/Test.class
+.classpath
+
+# Classes binaires ignorées
+build/
+
+Thumbs.db
+.settings/
+.classpath

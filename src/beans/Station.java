@@ -2,6 +2,12 @@ package beans;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
+=======
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+>>>>>>> origin/master
 public class Station implements Serializable {
 
 	// *******************************************

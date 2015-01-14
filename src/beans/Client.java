@@ -1,9 +1,16 @@
 package beans;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 import java.sql.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
+=======
+import java.util.Date;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+>>>>>>> origin/master
 @XmlRootElement
 public class Client implements Serializable {
 

@@ -2,6 +2,12 @@ package beans;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
+=======
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+>>>>>>> origin/master
 public class Vehicule implements Serializable {
 
 	// *******************************************
@@ -15,6 +21,11 @@ public class Vehicule implements Serializable {
 	private Double latitude;
 	private Double longitude;
 	private Integer typeVehicule;
+<<<<<<< HEAD
+=======
+	private Integer idBorne;
+	private Integer station;
+>>>>>>> origin/master
 
 	// *******************************************
 	// CONSTRUCTEUR
@@ -81,4 +92,25 @@ public class Vehicule implements Serializable {
 	public void setTypeVehicule(Integer typeVehicule) {
 		this.typeVehicule = typeVehicule;
 	}
+<<<<<<< HEAD
+=======
+
+	public Integer getIdBorne() {
+		return idBorne;
+	}
+
+	public void setIdBorne(Integer idBorne) {
+		this.idBorne = idBorne;
+	}
+
+	public Integer getStation() {
+		return station;
+	}
+
+	public void setStation(Integer station) {
+		this.station = station;
+	}
+	
+	
+>>>>>>> origin/master
 }

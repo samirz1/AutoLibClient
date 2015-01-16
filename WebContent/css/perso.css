@@ -1,0 +1,76 @@
+html { 
+	
+}
+
+body {
+	padding-top:	70px;
+}
+body.background {	
+	background: url(../img/background.jpg) no-repeat center fixed;
+	-webkit-background-size: 	cover; /* pour Chrome et Safari */
+	-moz-background-size: 		cover; /* pour Firefox */
+	-o-background-size: 		cover; /* pour Opera */
+	background-size: 			cover; /* version standardisée */
+	
+}
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #222222;
+  color: white;
+  margin-top: 5px;
+}
+.footer .text-muted {
+	padding-top: 5px;
+}
+
+
+.page {
+    background: rgba(255,255,255,0.6) url(../img/logo_small.png) right top no-repeat;
+    padding: 20px 40px 20px 40px;
+    margin-top: 20px;
+    min-height: 480px;
+}
+@media only screen and (max-width : 992px) {
+    .page {
+    	background: white;
+        background: rgba(255,255,255,0.6) !important;
+        margin-top: 20px;
+    }
+}
+
+div.center {
+	text-align:	center;
+}
+
+table.table-bordered {
+	background-color: white;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+	margin-top: 5px;
+}
+
+img.ombre {
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+}
+
+.reserve {
+	background: repeating-linear-gradient(
+	  45deg,
+	  #F6F0E7,
+	  #EFEAE2 10px,
+	  #fffbf7 10px,
+	  #fffbf7 20px);
+}

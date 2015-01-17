@@ -39,15 +39,15 @@ body {
 
 
 .page {
-    background: rgba(255,255,255,0.6) url(../img/logo_small.png) right top no-repeat;
+    background: rgba(255,255,255,0.8) url(../img/logo_small.png) right top no-repeat;
     padding: 20px 40px 20px 40px;
-    margin-top: 20px;
+    margin-top: 15px;
     min-height: 480px;
 }
 @media only screen and (max-width : 992px) {
     .page {
     	background: white;
-        background: rgba(255,255,255,0.6) !important;
+        background: rgba(255,255,255,0.8) !important;
         margin-top: 20px;
     }
 }
@@ -73,4 +73,16 @@ img.ombre {
 	  #EFEAE2 10px,
 	  #fffbf7 10px,
 	  #fffbf7 20px);
+}
+
+@media only screen and (max-width : 600px) {
+	.container {
+		margin-top: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	
+	footer {
+		font-size:80%;
+	}
 }

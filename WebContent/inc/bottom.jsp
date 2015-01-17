@@ -3,7 +3,7 @@
     <footer class="footer">
       <div class="container">
         <div class="text-muted">
-        	Projet WebServices Oeuvres  - &copy; 2014<br />
-        	Anita Barry, Thibault Lazert - Polytech Lyon<br /></div>
+        	Projet WebServices AutoLib  - &copy; 2015<br />
+        	Anita Barry, Sylvain Cuer, Kevin Espenel, Samir Himmich, Thibault Lazert - Polytech Lyon<br /></div>
       </div>
     </footer>

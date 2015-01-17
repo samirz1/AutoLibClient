@@ -13,8 +13,14 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
           
-            <li <c:if test="${url == 'home'}">class="active"</c:if>><a href="./home">Accueil</a></li>
-            <li <c:if test="${url == 'animation'}">class="active"</c:if>><a href="./animation">Animation</a></li>
+          <c:if test="${sess_type == 'client'}">
+            <li <c:if test="${url == 'reservation'}">class="active"</c:if>><a href="./reservation">Réservation</a></li>
+          </c:if>
+          <c:if test="${sess_type == 'admin'}">
+          	<li <c:if test="${url == 'clients'}">class="active"</c:if>><a href="./clients">Clients</a></li>
+          	<li <c:if test="${url == 'stations'}">class="active"</c:if>><a href="./stations">Stations</a></li>
+          </c:if>
+            <li><a href="./home?action=logout">Déconnexion</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

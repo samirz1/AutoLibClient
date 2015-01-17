@@ -33,6 +33,8 @@
     </div>
     </div>
     </div>
+    
+    <jsp:include page="inc/bottom.jsp"></jsp:include>
 
 </body>
 </html>

@@ -1,12 +1,6 @@
 package controleur;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.*;
@@ -15,27 +9,16 @@ import beans.*;
  * Servlet implementation class Home
  */
 @WebServlet("/home")
-public class Home extends HttpServlet {
+public class Home extends SuperControleur {
 	private static final long serialVersionUID = 1L;
-	
-	private static String WS = "http://localhost:8080/AutoLibWebService/";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Home() {
+
+	public Home() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// récupérer la session courante et l'initialiser au besoin
-		HttpSession session = Session.init(request.getSession());
-		
-		String action = request.getParameter("action");
+	@Override
+	protected String execution() throws Exception {
+
 		if(action != null) {
 			
 			if(action.compareToIgnoreCase("logout") == 0) {
@@ -53,6 +36,7 @@ public class Home extends HttpServlet {
 				} else if(login.compareToIgnoreCase("admin") == 0) {
 					// connexion en tant qu'admin
 					Session.loginAdmin(session, 1); // OK !
+					request.setAttribute("autoredirect", true);
 					
 				} else {
 					// recherche d'un client
@@ -63,6 +47,7 @@ public class Home extends HttpServlet {
 						Client client = new Client();
 						client.setIdClient(1);
 						Session.loginClient(session, client.getIdClient()); // OK !
+						request.setAttribute("autoredirect", true);
 					} else {
 						request.setAttribute("message", "Client introuvable."); // NON
 					}
@@ -74,22 +59,12 @@ public class Home extends HttpServlet {
 		String page = "";
 		
 		if(Session.isConnected(session)) {
-			request.setAttribute("connecte", true);
-			request.setAttribute("message", "Bonjour " + (Session.isAdmin(session) ? "administrateur" : "client"));
+			request.setAttribute("message", "Vous êtes connecté en tant " + (Session.isAdmin(session) ? "qu'administrateur" : "que client") + " à cette application.");
 			page = "/home.jsp";
 		} else {
-			request.setAttribute("connecte", false);
 			page = "/login.jsp";
 		}
 		
-		this.getServletContext().getRequestDispatcher(page).forward(request, response);
+		return page;
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	/*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}*/
-
 }

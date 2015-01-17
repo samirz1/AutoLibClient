@@ -46,6 +46,12 @@ abstract public class SuperControleur extends HttpServlet {
 			// appel de la méthode principale
 			view = execution();
 			
+		} catch(AccessException e) {
+			// récupération des erreurs
+			view = "/erreur_acces.jsp";
+			this.request.setAttribute("erreur", e.getMessage());
+			// annuler l'effet d'une éventuelle redirection
+			this.redirection = null;
 		} catch(Exception e) {
 			// récupération des erreurs
 			view = "/erreur.jsp";
@@ -86,5 +92,49 @@ abstract public class SuperControleur extends HttpServlet {
 	 */
 	protected void setRedirection(String url) {
 		this.redirection = url;
+	}
+	
+	/**
+	 * Savoir si l'admin a le droit d'accéder à la ressource
+	 * @param exception false pour ne pas lever d'exception
+	 * @return boolean
+	 * @throws AccessException
+	 */
+	protected boolean checkAccessAdmin(boolean exception) throws AccessException {
+		boolean result = Session.isAdmin(this.session);
+		if(exception && !result) {
+			throw new AccessException("Vous devez être administrateur pour accéder à cette fonction.");
+		}
+		return result;
+	}
+	
+	/**
+	 * Retourne une exception si l'admin n'a pas le droit d'accès
+	 * @throws AccessException
+	 */
+	protected boolean checkAccessAdmin() throws AccessException {
+		return checkAccessAdmin(true);
+	}
+	
+	/**
+	 * Savoir si le client a le droit d'accéder à la ressource
+	 * @param exception false pour ne pas lever d'exception
+	 * @return boolean
+	 * @throws AccessException
+	 */
+	protected boolean checkAccessClient(boolean exception) throws AccessException {
+		boolean result = Session.isClient(this.session);
+		if(exception && !result) {
+			throw new AccessException("Vous devez être client pour accéder à cette fonction.");
+		}
+		return result;
+	}
+	
+	/**
+	 * Retourne une exception si le client n'a pas le droit d'accès
+	 * @throws AccessException
+	 */
+	protected boolean checkAccessClient() throws AccessException {
+		return checkAccessClient(true);
 	}
 }

@@ -28,6 +28,10 @@
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
 			Supprimer un client</button>
 	</form>
+
+
+
+
 	<form action="controleurVehicule?action=toutRechercher" method="POST">
 		<button type="submit" class="btn btn-primary"
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
@@ -53,7 +57,11 @@
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
 			Rechercher un vehicule</button>
 	</form>
-	
+
+
+
+
+
 	<form action="controleurStation">
 		<input type="hidden" name="action" value="liste" />
 		<button type="submit" class="btn btn-primary"
@@ -66,5 +74,37 @@
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
 			Ajouter une station</button>
 	</form>
+
+
+
+
+
+
+
+
+	<form action="controleurReservation">
+		<input type="hidden" name="action" value="creation" />
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Ajouter une reservation </button>
+	</form>
+	
+	
+	
+	<form action="controleurReservation">
+		<input type="hidden" name="action" value="liste" />
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Liste des réservations </button>
+	</form>
+	
+	<form action="controleurReservation">
+		<input type="hidden" name="action" value="rechercher" />
+		<button type="submit" class="btn btn-primary"
+			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
+			Liste des réservations </button>
+	</form>
+
+
 </body>
 </html>

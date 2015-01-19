@@ -8,9 +8,11 @@
 <body>
 	<h1>Connection d'un client</h1>
 	<form method="get" action="controleur">
-		<label>Nom Client </label>
-	    <input type="text" id="nomClient" name="nomClient" value="" size="20" maxlength="20" />
-	    <br />    
+		<label>Login </label>
+	    <input type="text" id="login" name="login" value="" size="14" maxlength="45" />
+	      
+	     <label>Pwd</label>
+	    <input type="password" id="pwd" name="pwd" value="" size="14" maxlength="45" />
 		
 	    <button type="submit"/> Valider </button>
 	    <input type="hidden" name="action" value="connexionClient">

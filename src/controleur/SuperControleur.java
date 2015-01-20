@@ -137,4 +137,20 @@ abstract public class SuperControleur extends HttpServlet {
 	protected boolean checkAccessClient() throws AccessException {
 		return checkAccessClient(true);
 	}
+	
+	/**
+	 * Savoir si le controleur est appelé depuis une requête POST
+	 * @return boolean
+	 */
+	protected boolean isPost() {
+		return (request.getMethod().compareToIgnoreCase("post") == 0);
+	}
+	
+	/**
+	 * Savoir si le controleur est appelé depuis une requête GET
+	 * @return boolean
+	 */
+	protected boolean isGet() {
+		return (request.getMethod().compareToIgnoreCase("get") == 0);
+	}
 }

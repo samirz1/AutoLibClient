@@ -80,7 +80,7 @@ public class Reservation implements Serializable {
 	}
 
 	/**
-	 * Jour Mois Année de réservation
+	 * Jour Mois Année de échéance
 	 * @return
 	 */
 	public int getJourE(){

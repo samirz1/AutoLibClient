@@ -56,7 +56,7 @@ public class ControleurReservation extends HttpServlet{
 				if(request.getMethod().compareToIgnoreCase("post") == 0) {
 					// validation du formulaire
 					String param = "";
-					param += "idVehicule=" + URLEncoder.encode(request.getParameter("idvehicule"),"ISO-8859-1");
+					param += "idVehicule=" + URLEncoder.encode(request.getParameter("idVehicule"),"ISO-8859-1");
 					param += "idClient=" + URLEncoder.encode(request.getParameter("idClient"),"ISO-8859-1");
 					param += "dateReservation=" + URLEncoder.encode(request.getParameter("dateReservation"),"ISO-8859-1");
 					param += "dateEcheance=" + URLEncoder.encode(request.getParameter("dateEcheance"),"ISO-8859-1");
@@ -76,14 +76,14 @@ public class ControleurReservation extends HttpServlet{
 				
 			case "suppression":
 				vue = "/supprimerReservation.jsp";
-				idVehicule = request.getParameter("idvehicule");
+				idVehicule = request.getParameter("idVehicule");
 				idClient = request.getParameter("idClient");
 				System.out.println("idVehicule"+idVehicule);
 				System.out.println("idClient");
 				if(idVehicule == null || idClient ==null) {
 					throw new Exception("Paramètre id(s) manquants.");
 				}
-				resultat = Client.create().resource(WS + "serviceReservation/supprimer/" + idVehicule +idClient+ "/").get(MyBoolean.class);
+				resultat = Client.create().resource(WS + "serviceReservation/supprimer/" + idVehicule +"/"+idClient+ "/").get(MyBoolean.class);
 				if(resultat.isB()) {
 					request.setAttribute("message", "Suppression effectuée !");
 				} else {

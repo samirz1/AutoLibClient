@@ -20,13 +20,13 @@
 	    <label>Date reservation:  </label>
 	    <br />
 	     <label>Jour </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getJourR()}" size="10" maxlength="20" />
+	    <input type="text" id="jourR" name="jourR" value="${resa.getJourR()}" size="10" maxlength="20" />
 	     <label>Mois </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getMoisR()}" size="10" maxlength="20" />
+	    <input type="text" id="moisR" name="moisR" value="${resa.getMoisR()}" size="10" maxlength="20" />
 	     <label>Année </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getYearR()}" size="10" maxlength="20" />
+	    <input type="text" id="anneeR" name="anneeR" value="${resa.getYearR()}" size="10" maxlength="20" />
 	    <label>Heure </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getHourR()}" size="10" maxlength="20" />
+	    <input type="text" id="heureR" name="heureR" value="${resa.getHourR()}" size="10" maxlength="20" />
 	     <br />
 	      <br />
 	     
@@ -36,14 +36,14 @@
 	    <label>Date echéance : </label>
 	     <br />
 	     <label>Jour </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getJourE()}" size="10" maxlength="20" />
+	    <input type="text" id="jourE" name="jourE" value="${resa.getJourE()}" size="10" maxlength="20" />
 	    
 	     <label>Mois </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getMoisE()}" size="10" maxlength="20" />
+	    <input type="text" id="moisE" name="moisE" value="${resa.getMoisE()}" size="10" maxlength="20" />
 	     <label>Année </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getYearE()}" size="10" maxlength="20" />
+	    <input type="text" id="annneE" name="annneE" value="${resa.getYearE()}" size="10" maxlength="20" />
 	    <label>Heure </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getHourE()}" size="10" maxlength="20" />
+	    <input type="text" id="heureE" name="heureE" value="${resa.getHourE()}" size="10" maxlength="20" />
 	    <br />
 		<br />
 	    <input type="submit" value="Valider" />

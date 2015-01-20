@@ -97,11 +97,11 @@ public class Reservation implements Serializable {
 	}
 
 	public String getHourR(){
-		String r = this.getDateReservation().getHourOfDay() +"H:"+this.getDateReservation().getMinuteOfHour();
+		String r = this.getDateReservation().getHourOfDay() +":"+this.getDateReservation().getMinuteOfHour();
 		return r;	}
 	
 	public String getHourE(){
-			String r = this.getDateEcheance().getHourOfDay() +"H:"+this.getDateEcheance().getMinuteOfHour();
+			String r = this.getDateEcheance().getHourOfDay() +":"+this.getDateEcheance().getMinuteOfHour();
 			return r;
 	}
 }

@@ -55,12 +55,14 @@ public class ControleurReservation extends HttpServlet{
 				vue = "/creationReservation.jsp";
 				if(request.getMethod().compareToIgnoreCase("post") == 0) {
 					// validation du formulaire
-					String param = "";
-					param += "idVehicule=" + URLEncoder.encode(request.getParameter("idVehicule"),"ISO-8859-1");
-					param += "idClient=" + URLEncoder.encode(request.getParameter("idClient"),"ISO-8859-1");
-					param += "dateReservation=" + URLEncoder.encode(request.getParameter("dateReservation"),"ISO-8859-1");
-					param += "dateEcheance=" + URLEncoder.encode(request.getParameter("dateEcheance"),"ISO-8859-1");
 					
+					String param = "";
+					param += URLEncoder.encode(request.getParameter("jour"),"ISO-8859-1") + "-" ;
+					param +=URLEncoder.encode(request.getParameter("mois"),"ISO-8859-1") + "-" ;
+					param +=URLEncoder.encode(request.getParameter("annee"),"ISO-8859-1") + " " ;
+					param +=URLEncoder.encode(request.getParameter("heure"),"ISO-8859-1") ;
+					param += URLEncoder.encode("jour-mois-annee h:m","ISO-8859-1");
+							
 					resultat = Client.create().resource(WS + "serviceReservation/creation/?" + param).get(MyBoolean.class);
 					System.out.println("cc");
 					if(resultat.isB()) {

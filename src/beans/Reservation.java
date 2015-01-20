@@ -61,5 +61,47 @@ public class Reservation implements Serializable {
 	public void setDateEcheance(DateTime dateEcheance) {
 		this.dateEcheance = dateEcheance;
 	}
+	
+	/**
+	 * Jour Mois Année de réservation
+	 * @return
+	 */
+	public int getJourR(){
+		return this.getDateReservation().getDayOfMonth();
+		
+	}
+	
+	public int getMoisR(){
+		return this.getDateReservation().getMonthOfYear();
+	}
+	
+	public int getYearR(){
+		return this.getDateReservation().getYear();
+	}
 
+	/**
+	 * Jour Mois Année de réservation
+	 * @return
+	 */
+	public int getJourE(){
+		return this.getDateEcheance().getDayOfMonth();
+		
+	}
+	
+	public int getMoisE(){
+		return this.getDateEcheance().getMonthOfYear();
+	}
+	
+	public int getYearE(){
+		return this.getDateEcheance().getYear();
+	}
+
+	public String getHourR(){
+		String r = this.getDateReservation().getHourOfDay() +"H:"+this.getDateReservation().getMinuteOfHour();
+		return r;	}
+	
+	public String getHourE(){
+			String r = this.getDateEcheance().getHourOfDay() +"H:"+this.getDateEcheance().getMinuteOfHour();
+			return r;
+	}
 }

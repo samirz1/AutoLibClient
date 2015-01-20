@@ -61,7 +61,6 @@ public class ControleurReservation extends HttpServlet{
 					param += "dateReservation=" + URLEncoder.encode(request.getParameter("dateReservation"),"ISO-8859-1");
 					param += "dateEcheance=" + URLEncoder.encode(request.getParameter("dateEcheance"),"ISO-8859-1");
 					
-					System.out.println("param"+param);
 					resultat = Client.create().resource(WS + "serviceReservation/creation/?" + param).get(MyBoolean.class);
 					System.out.println("cc");
 					if(resultat.isB()) {
@@ -79,6 +78,8 @@ public class ControleurReservation extends HttpServlet{
 				vue = "/supprimerReservation.jsp";
 				idVehicule = request.getParameter("idvehicule");
 				idClient = request.getParameter("idClient");
+				System.out.println("idVehicule"+idVehicule);
+				System.out.println("idClient");
 				if(idVehicule == null || idClient ==null) {
 					throw new Exception("Paramètre id(s) manquants.");
 				}
@@ -103,8 +104,8 @@ public class ControleurReservation extends HttpServlet{
 				if(request.getMethod().compareToIgnoreCase("post") == 0) {
 					// validation du formulaire
 					String param = "";
-					param += "idVehicule=" + URLEncoder.encode(request.getParameter("idvehicule"),"ISO-8859-1");
-					param += "idClient=" + URLEncoder.encode(request.getParameter("idClient"),"ISO-8859-1");
+					//param += "idVehicule=" + URLEncoder.encode(request.getParameter("idvehicule"),"ISO-8859-1");
+					//param += "idClient=" + URLEncoder.encode(request.getParameter("idClient"),"ISO-8859-1");
 					param += "dateReservation=" + URLEncoder.encode(request.getParameter("dateReservation"),"ISO-8859-1");
 					param += "dateEcheance=" + URLEncoder.encode(request.getParameter("dateEcheance"),"ISO-8859-1");
 					System.out.println("param");
@@ -116,8 +117,8 @@ public class ControleurReservation extends HttpServlet{
 					}
 				}
 				
-				Reservation reservation = Client.create().resource(WS + "serviceReservation/id-" + idVehicule+"/" +idClient).get(Reservation.class);
-				request.setAttribute("reservation", reservation);
+				Reservation reservation = Client.create().resource(WS + "serviceReservation/rechercher/" + idVehicule+"/" +idClient).get(Reservation.class);
+				request.setAttribute("resa", reservation);
 				break;
 				
 			default:

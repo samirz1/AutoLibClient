@@ -8,17 +8,42 @@
 <body>
 	<h1>Modification d'une station</h1>
 	<form method="get" action="controleurReservation">
-		<label>idVehicule </label>
-	    <input type="text" id="idVehicule" name="idVehicule" value="${resa.getVehicule().getIdVehicule()}" size="20" maxlength="20" />
+		<label>idVehicule : </label>
+	    ${resa.getVehicule().getIdVehicule()}
 	    <br />
-	    <label>idClient </label>
-	    <input type="text" id="idClient" name="idClient" value="${resa.getClient().getIdClient()}" size="20" maxlength="20" />
+	    <label>idClient :</label>
+	    ${resa.getClient().getIdClient()}
 	    <br />
-	    <label>Date reservation </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getDateReservation()}" size="20" maxlength="20" />
 	     <br />
-	    <label>Date echéance </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getDateEcheance()}" size="20" maxlength="20" />
+	    
+	    
+	    <label>Date reservation:  </label>
+	    <br />
+	     <label>Jour </label>
+	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getJourR()}" size="10" maxlength="20" />
+	     <label>Mois </label>
+	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getMoisR()}" size="10" maxlength="20" />
+	     <label>Année </label>
+	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getYearR()}" size="10" maxlength="20" />
+	    <label>Heure </label>
+	    <input type="text" id="dateReservation" name="dateReservation" value="${resa.getHourR()}" size="10" maxlength="20" />
+	     <br />
+	      <br />
+	     
+	     
+	     
+	     
+	    <label>Date echéance : </label>
+	     <br />
+	     <label>Jour </label>
+	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getJourE()}" size="10" maxlength="20" />
+	    
+	     <label>Mois </label>
+	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getMoisE()}" size="10" maxlength="20" />
+	     <label>Année </label>
+	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getYearE()}" size="10" maxlength="20" />
+	    <label>Heure </label>
+	    <input type="text" id="dateEcheance" name="dateEcheance" value="${resa.getHourE()}" size="10" maxlength="20" />
 	    <br />
 		<br />
 	    <input type="submit" value="Valider" />

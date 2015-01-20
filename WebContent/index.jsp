@@ -102,7 +102,7 @@
 		<input type="hidden" name="action" value="rechercher" />
 		<button type="submit" class="btn btn-primary"
 			style="display: block; margin: auto; margin-top: 5%; height: 60px;">
-			Liste des réservations </button>
+			Rechercher une réservation </button>
 	</form>
 
 

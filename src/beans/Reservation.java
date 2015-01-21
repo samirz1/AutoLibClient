@@ -1,10 +1,11 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.joda.time.DateTime;
 
 @XmlRootElement
 public class Reservation implements Serializable {
@@ -15,8 +16,11 @@ public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Vehicule vehicule;
 	private Client client;
-	private DateTime dateReservation;
-	private DateTime dateEcheance;
+	private Date dateReservation;
+	private Date dateEcheance;
+	
+	private Calendar calendarReservation;
+	private Calendar calendarEcheance;
 
 	// *******************************************
 	// CONSTRUCTEUR
@@ -25,6 +29,8 @@ public class Reservation implements Serializable {
 		super();
 		this.setClient(new Client());
 		this.setVehicule(new Vehicule());
+		this.calendarReservation = GregorianCalendar.getInstance();
+		this.calendarEcheance = GregorianCalendar.getInstance();
 	}
 
 	// *******************************************
@@ -46,62 +52,107 @@ public class Reservation implements Serializable {
 		this.client = client;
 	}
 
-	public DateTime getDateReservation() {
+	public Date getDateReservation() {
 		return dateReservation;
 	}
 
-	public void setDateReservation(DateTime dateReservation) {
+	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
+		this.calendarReservation.setTime(this.dateReservation);
 	}
 
-	public DateTime getDateEcheance() {
+	public Date getDateEcheance() {
 		return dateEcheance;
 	}
 
-	public void setDateEcheance(DateTime dateEcheance) {
+	public void setDateEcheance(Date dateEcheance) {
 		this.dateEcheance = dateEcheance;
+		this.calendarEcheance.setTime(this.dateEcheance);
 	}
 	
 	/**
-	 * Jour Mois Année de réservation
+	 * Jour de réservation
 	 * @return
 	 */
 	public int getJourR(){
-		return this.getDateReservation().getDayOfMonth();
+		return this.calendarReservation.get(Calendar.DAY_OF_MONTH);
 		
 	}
 	
+	/**
+	 * Mois de réservation
+	 * @return
+	 */
 	public int getMoisR(){
-		return this.getDateReservation().getMonthOfYear();
+		return this.calendarReservation.get(Calendar.MONTH) + 1;
 	}
 	
-	public int getYearR(){
-		return this.getDateReservation().getYear();
+	/**
+	 * Année de réservation
+	 * @return
+	 */
+	public int getAnneeR(){
+		return this.calendarReservation.get(Calendar.YEAR);
+	}
+	
+	/**
+	 * Heure de réservation
+	 * @return
+	 */
+	public String getHeureR(){
+		return this.calendarReservation.get(Calendar.HOUR_OF_DAY)
+				+ ":" + this.calendarReservation.get(Calendar.MINUTE);
 	}
 
 	/**
-	 * Jour Mois Année de échéance
+	 * Jour d'échéance
 	 * @return
 	 */
 	public int getJourE(){
-		return this.getDateEcheance().getDayOfMonth();
+		return this.calendarEcheance.get(Calendar.DAY_OF_MONTH);
 		
 	}
 	
+	/**
+	 * Mois d'échéance
+	 * @return
+	 */
 	public int getMoisE(){
-		return this.getDateEcheance().getMonthOfYear();
+		return this.calendarEcheance.get(Calendar.MONTH) + 1;
 	}
 	
-	public int getYearE(){
-		return this.getDateEcheance().getYear();
+	/**
+	 * Année d'échéance
+	 * @return
+	 */
+	public int getAnneeE(){
+		return this.calendarEcheance.get(Calendar.YEAR);
 	}
 
-	public String getHourR(){
-		String r = this.getDateReservation().getHourOfDay() +":"+this.getDateReservation().getMinuteOfHour();
-		return r;	}
+	/**
+	 * Heure d'échéance
+	 * @return
+	 */
+	public String getHeureE(){
+		return this.calendarEcheance.get(Calendar.HOUR_OF_DAY)
+				+ ":" + this.calendarEcheance.get(Calendar.MINUTE);
+	}
 	
-	public String getHourE(){
-			String r = this.getDateEcheance().getHourOfDay() +":"+this.getDateEcheance().getMinuteOfHour();
-			return r;
+	/**
+	 * Date de réservation au format français des dates
+	 * @return
+	 */
+	public String getDateReservationString() {
+		return this.getJourR() + "/" + this.getMoisR() + "/" + this.getAnneeR()
+				+ " " + this.getHeureR();
+	}
+	
+	/**
+	 * Date de réservation au format français des dates
+	 * @return
+	 */
+	public String getDateEcheanceString() {
+		return this.getJourE() + "/" + this.getMoisE() + "/" + this.getAnneeE()
+				+ " " + this.getHeureE();
 	}
 }

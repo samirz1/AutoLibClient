@@ -7,22 +7,34 @@
 </head>
 <body>
 	<h1>Creation d'une réservation</h1>
-	<form method="get" action="controleurReservation">
+	
+	<form method="post" action="controleurReservation">
 		<label>idVehicule </label>
-	    <input type="text" id="idVehicule" name="idVehicule" value="" size="20" maxlength="20" />
+	    <input type="text" id="idVehicule" name="idVehicule" value="" size="5" maxlength="20" />
 	    <br />
 	    <label>idClient </label>
-	    <input type="text" id="idClient" name="idClient" value="" size="20" maxlength="20" />
+	    <input type="text" id="idClient" name="idClient" value="" size="5" maxlength="20" />
 	    <br />
-	    <label>Date reservation </label>
-	    <input type="text" id="dateReservation" name="dateReservation" value="" size="20" maxlength="20" />
-	     <br />
-	    <label>Date echéance </label>
-	    <input type="text" id="dateEcheance" name="dateEcheance" value="" size="20" maxlength="20" />
+	    <label>Date reservation : le </label>
+	    <input type="text" id="jourR" name="jourR" value="" size="2" maxlength="2" />/
+	    <input type="text" id="moisR" name="moisR" value="" size="2" maxlength="2" />/
+	    <input type="text" id="anneeR" name="anneeR" value="" size="4" maxlength="4" /> 
+	    à 
+	    <input type="text" id="heureR" name="heureR" value="" size="5" maxlength="5" />
+	    <br />
+	    <br />
+
+	    <label>Date d'échéance : le </label>
+	    <input type="text" id="jourE" name="jourE" value="" size="2" maxlength="2" />/
+	    <input type="text" id="moisE" name="moisE" value="" size="2" maxlength="2" />/
+	    <input type="text" id="anneeE" name="anneeE" value="" size="4" maxlength="4" /> 
+	    à 
+	    <input type="text" id="heureE" name="heureE" value="" size="5" maxlength="5" />
 	    <br />
 		<br />
-	    <button type="submit"/> Valider </button>
-	    <input type="hidden" name="action" value="creation">
+		
+	    <input type="submit" value="Valider" />
+	    <input type="hidden" name="action" value="creation" />
     </form>
     
     <core:out value="${message}"/>

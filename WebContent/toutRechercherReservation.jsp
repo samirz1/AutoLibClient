@@ -13,8 +13,8 @@
 		<tr> 
 			<td> <core:out value="${resa.getVehicule().getIdVehicule()}"/> </td>
 			<td> <core:out value="${resa.getClient().getIdClient()}"/> </td>
-			<td> <core:out value="${resa.getDateReservation()}"/> </td>
-			<td> <core:out value="${resa.getDateEcheance()}"/> </td>
+			<td> <core:out value="${resa.getDateReservationString()}"/> </td>
+			<td> <core:out value="${resa.getDateEcheanceString()}"/> </td>
 			<td> <a href="controleurReservation?action=modification&idVehicule=${resa.getVehicule().getIdVehicule()}&idClient=${resa.getClient().getIdClient()}">modifier</a> </td>
 			<td> <a href="controleurReservation?action=suppression&idVehicule=${resa.getVehicule().getIdVehicule()}&idClient=${resa.getClient().getIdClient()}" onclick="return confirm('Supprimer ?');">supprimer</a> </td>
 		</tr>

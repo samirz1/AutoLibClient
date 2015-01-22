@@ -1,39 +1,108 @@
-<%@ page pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!doctype html>
 <html>
 <head>
-<meta charset="utf-8" />
+<title>AutoLib - Projet</title>
+<jsp:include page="inc/head.jsp"></jsp:include>
+<script type="text/javascript" src="js/Maps.js"></script>
 </head>
-<body>
-	<h1>Modification d'une station</h1>
-	<form method="post" action="controleurStation">
-		<label>Numéro </label>
-	    <input type="text" id="numero" name="numero" value="${station.getNumero()}" size="4" maxlength="10" />
-	    <br />
-		<label>Adresse </label>
-	    <input type="text" id="adresse" name="adresse" value="${station.getAdresse()}" size="50" maxlength="100" />
-	    <br />
-	    <label>CP </label>
-	    <input type="text" id="codepostal" name="codepostal" value="${station.getCodePostal()}" size="5" maxlength="5" />
-	    <br />
-	    <label>Ville </label>
-	    <input type="text" id="ville" name="ville" value="${station.getVille()}" size="50" maxlength="60" />
-	    <br />
-	    <label>Latitude </label>
-	    <input type="text" id="latitude" name="latitude" value="${station.getLatitude()}" size="50" maxlength="60" />
-	    <br />
-	    <label>Longitude </label>
-	    <input type="text" id="longitude" name="longitude" value="${station.getLongitude()}" size="50" maxlength="60" />
-	    <br />
-		<br />
-	    <input type="submit" value="Valider" />
-	    <input type="hidden" name="action" value="modification" />
-	    <input type="hidden" name="id" value="${station.getIdStation()}" />
-    </form>
+<body class="background">
+	
+	<jsp:include page="inc/top.jsp"></jsp:include>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+        
+        <div class="page">
+                
+            <div class="row">
+                        
+                <h1>Modifier une station</h1>
+                <h2>Modification des informations relative à la station n°${station.getIdStation()}</h2>
+                
+    			<c:out value="${message}" />
+    			
+				<form method="post" action="controleurStation" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="numero">Numéro </label>
+						<div class="col-sm-10">
+					    	<input type="text" id="numero" name="numero" value="${station.getNumero()}" size="5" maxlength="10" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group">
+						<label class="control-label col-sm-2" for="adresse">Adresse </label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="adresse" name="adresse" value="${station.getAdresse()}" size="50" maxlength="100" />
+				   		</div>
+					</div>
+				    
+				    <div class="form-group">
+					    <label class="control-label col-sm-2" for="codepostal">CP </label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="codepostal" name="codepostal" value="${station.getCodePostal()}" size="5" maxlength="5" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group">
+					    <label class="control-label col-sm-2" for="ville">Ville </label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="ville" name="ville" value="${station.getVille()}" size="50" maxlength="60" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group">
+					    <label class="control-label col-sm-2" for="latitude">Latitude </label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="latitude" name="latitude" value="${station.getLatitude()}" size="50" maxlength="60" />
+					    </div>
+				    </div>
+				    
+				    <div class="form-group">
+					    <label class="control-label col-sm-2" for="longitude">Longitude </label>
+					    <div class="col-sm-10">
+					    	<input type="text" id="longitude" name="longitude" value="${station.getLongitude()}" size="50" maxlength="60" />
+					    </div>
+				    </div>
+				  
+				    <input type="hidden" name="action" value="modification" />
+				    <input type="hidden" name="id" value="${station.getIdStation()}" />
+				    
+				    <div class="form-group">
+                   		<div class="col-sm-offset-2 col-sm-10">
+                   			<button
+								class="btn btn-success" type="submit">
+									<span class="glyphicon glyphicon-ok" aria-hidden="true" title="Enregistrer"></span> Enregistrer
+							</button>
+                   			<button
+								class="btn btn-info" type="reset">
+									<span class="glyphicon glyphicon-refresh" aria-hidden="true" title="Réinitialiser"></span>
+							</button>
+                   			<button
+								class="btn btn-danger" type="button"
+								onclick="loc_conf('Attention, vous êtes sur le point de supprimer complètement cette station !','./controleurStation?action=suppression&id=${station.getIdStation()}');">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Supprimer"></span>
+							</button>
+                   		</div>
+                    </div>
+			    </form>
+			    
+			    
     
-    <core:out value="${message}"/>
+   				<br /><br />
+   				<a href="./controleurStation?action=plan">Retour</a>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
     
-    <br /><a href="./controleurStation?action=liste">Retour</a>
+    <jsp:include page="inc/bottom.jsp"></jsp:include>
+
 </body>
 </html>

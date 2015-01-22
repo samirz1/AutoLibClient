@@ -2,8 +2,6 @@ package beans;
 
 import javax.servlet.http.HttpSession;
 
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
-
 /**
  * Classe utilisée pour les clés des objets 
  * stockés en session.
@@ -59,12 +57,6 @@ public class Session {
 		session.setAttribute(CONNECTE, true);
 		session.setAttribute(IDUSER, user);
 		session.setAttribute(TYPEUSER, type);
-		if(TYPEUSER.equals(Utilisateur.ADMIN)) {
-			Client admin = new Client();
-			admin.setLogin("admin");
-			admin.setPrenom("Administrateur");
-			session.setAttribute(CLIENT, admin);
-		}
 		
 		return session;
 	}
@@ -86,6 +78,10 @@ public class Session {
 	 * @return
 	 */
 	public static HttpSession loginAdmin(HttpSession session, int user) {
+		Client admin = new Client();
+		admin.setLogin("admin");
+		admin.setPrenom("Administrateur");
+		session.setAttribute(CLIENT, admin);
 		return login(session, user, Utilisateur.ADMIN);
 	}
 	

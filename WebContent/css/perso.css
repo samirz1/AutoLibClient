@@ -86,3 +86,16 @@ img.ombre {
 		font-size:80%;
 	}
 }
+
+.map-wrap {
+	margin:			auto;
+}
+.map-canvas {
+	height: 		500px;
+	margin-top:		20px;
+}
+@media only screen and (max-width : 600px) {
+	.map-canvas {
+		height: 	400px;
+	}	
+}

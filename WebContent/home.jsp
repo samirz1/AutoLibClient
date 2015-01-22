@@ -26,7 +26,7 @@
                 <c:out value="${message}"></c:out><br />
                 Cliquez pour entrer.<br />
                 <br />
-                <a href="./model.jsp" id="go"><img src="img/entrance.png" alt="Entrer" /></a>
+                <a href="./controleurStation?action=plan" id="go"><img src="img/entrance.png" alt="Entrer" /></a>
                 
                 <form action="home" name="logout" role="form" class="form-horizontal" method="post" accept-charset="utf-8">
 					<input type="hidden" name="action" value="logout" />

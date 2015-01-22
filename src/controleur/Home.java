@@ -1,12 +1,7 @@
 package controleur;
 
 import java.net.URLEncoder;
-import java.security.URIParameter;
-
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpSession;
-
-import jdk.nashorn.internal.runtime.URIUtils;
 
 import com.sun.jersey.api.client.Client;
 
@@ -59,7 +54,6 @@ public class Home extends SuperControleur {
 						client.setIdClient(1);
 						Session.loginClient(session, client.getIdClient()); // OK !
 						Session.setClient(session, client);
-						System.out.println("Login connecté : " + client.getLogin());
 						request.setAttribute("autoredirect", true);
 					} else {
 						request.setAttribute("message", "Client introuvable."); // NON

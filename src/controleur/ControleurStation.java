@@ -37,6 +37,12 @@ public class ControleurStation extends SuperControleur {
 			vue = "/toutRechercherStation.jsp";
 			break;
 			
+		case "plan":
+			List<Station> listeStationsPlan = Client.create().resource(WS + "serviceStation/toutRechercher").get(new GenericType<List<Station>>(){});
+			request.setAttribute("listeStations", listeStationsPlan);
+			vue = "/planStations.jsp";
+			break;
+			
 		case "creation":
 			vue = "/creationStation.jsp";
 			if(request.getMethod().compareToIgnoreCase("post") == 0) {

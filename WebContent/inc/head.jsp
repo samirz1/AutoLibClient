@@ -16,5 +16,10 @@
 	<link href="select2/select2.css" rel="stylesheet"/>
 	<script src="select2/select2.js"></script>
 	
+	<!-- Google Maps API JS v3 -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+	
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:400,700,300" />
+    
+    <script src="js/script.js"></script>

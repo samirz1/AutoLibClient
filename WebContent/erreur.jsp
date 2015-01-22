@@ -29,6 +29,9 @@
                 <p>
                		<em><c:out value="${erreur}" /></em>
                	</p>
+               	
+               	<br /><br />
+               	<a href="#" class="historyback">Retour</a>
             </div>
             
         </div>

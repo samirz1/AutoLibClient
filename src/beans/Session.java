@@ -2,6 +2,8 @@ package beans;
 
 import javax.servlet.http.HttpSession;
 
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+
 /**
  * Classe utilisée pour les clés des objets 
  * stockés en session.
@@ -19,6 +21,7 @@ public class Session {
 		CLIENT,
 		ADMIN
 	};
+	protected static String CLIENT = "client";
 	
 	/**
 	 * Initialiser une session si elle est vide.
@@ -31,6 +34,7 @@ public class Session {
 			session.setAttribute(IDUSER, 0);
 			session.setAttribute(TYPEUSER, Utilisateur.NONE);
 			session.setAttribute(INIT, true);
+			session.setAttribute(CLIENT, new Client());
 		}
 		return session;
 	}
@@ -55,6 +59,12 @@ public class Session {
 		session.setAttribute(CONNECTE, true);
 		session.setAttribute(IDUSER, user);
 		session.setAttribute(TYPEUSER, type);
+		if(TYPEUSER.equals(Utilisateur.ADMIN)) {
+			Client admin = new Client();
+			admin.setLogin("admin");
+			admin.setPrenom("Administrateur");
+			session.setAttribute(CLIENT, admin);
+		}
 		
 		return session;
 	}
@@ -88,6 +98,7 @@ public class Session {
 		session.setAttribute(CONNECTE, false);
 		session.setAttribute(IDUSER, 0);
 		session.setAttribute(TYPEUSER, Utilisateur.NONE);
+		session.setAttribute(CLIENT, new Client());
 		
 		return session;
 	}
@@ -135,5 +146,25 @@ public class Session {
 	 */
 	public static boolean isAdmin(HttpSession session) {
 		return (getTypeUtilisateur(session) == Utilisateur.ADMIN);
+	}
+	
+	/**
+	 * Stocker les informations du client dans la session
+	 * @param session
+	 * @param client
+	 * @return
+	 */
+	public static HttpSession setClient(HttpSession session, Client client) {
+		session.setAttribute(CLIENT, client);
+		return session;
+	}
+	
+	/**
+	 * Récupérer les informations du client de la session
+	 * @param session
+	 * @return
+	 */
+	public static Client getClient(HttpSession session) {
+		return (Client) session.getAttribute(CLIENT);
 	}
 }

@@ -1,7 +1,14 @@
 package controleur;
 
+import java.net.URLEncoder;
+import java.security.URIParameter;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
+
+import jdk.nashorn.internal.runtime.URIUtils;
+
+import com.sun.jersey.api.client.Client;
 
 import beans.*;
 
@@ -29,6 +36,8 @@ public class Home extends SuperControleur {
 			} else if(action.compareToIgnoreCase("login") == 0) {
 				// connexion
 				String login = request.getParameter("login");
+				String password = request.getParameter("password");
+				
 				if(login == null || login.length() == 0) {
 					/// erreur de connexion
 					request.setAttribute("message", "Connexion refusée sans login."); // NON
@@ -40,13 +49,17 @@ public class Home extends SuperControleur {
 					
 				} else {
 					// recherche d'un client
-					// TODO appel du WS de login du client
-					MyBoolean resultat = new MyBoolean(true);
+					
+					String urlLogin = URLEncoder.encode(login,"ISO-8859-1").replace("+", "%20");
+					String urlPwd = URLEncoder.encode(password,"ISO-8859-1").replace("+", "%20");
+					MyBoolean resultat = Client.create().resource(WS + "serviceClient/connexionClient/" + urlLogin + "/" + urlPwd + "/").get(MyBoolean.class);
 					if(resultat.isB()) {
-						// TODO appel du WS de recherche client
-						Client client = new Client();
+						
+						beans.Client client = Client.create().resource(WS + "serviceClient/rechercher/login/" + urlLogin + "/").get(beans.Client.class);
 						client.setIdClient(1);
 						Session.loginClient(session, client.getIdClient()); // OK !
+						Session.setClient(session, client);
+						System.out.println("Login connecté : " + client.getLogin());
 						request.setAttribute("autoredirect", true);
 					} else {
 						request.setAttribute("message", "Client introuvable."); // NON

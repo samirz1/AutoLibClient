@@ -73,6 +73,7 @@ abstract public class SuperControleur extends HttpServlet {
 			this.request.setAttribute("sess_connecte", Session.isConnected(this.session));
 			this.request.setAttribute("sess_type", Session.isAdmin(this.session) ? "admin" : "client");
 			this.request.setAttribute("sess_iduser", Session.getIdUser(this.session));
+			this.request.setAttribute("sess_client", Session.getClient(session));
 			
 			// afficher une vue si elle est demandée
 			this.getServletContext().getRequestDispatcher(view).forward(this.request, this.response);

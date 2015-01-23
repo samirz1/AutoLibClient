@@ -34,12 +34,12 @@
 				
 				<c:if test="${sess_type == 'admin'}">
 				<c:forEach items="${listeStations}" var="station">
-				['<button class="btn btn-warning" type="button" onclick="loc(\'./controleurStation?action=modification&id=${station.getIdStation()}\');"><span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Modifier"></span></button> <c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/>', 
+				['<button class="btn btn-warning" type="button" onclick="loc(\'./controleurStation?action=modification&id=${station.getIdStation()}\');"><span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Modifier"></span></button> <c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
 					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>],</c:forEach></c:if>
 
 					<c:if test="${sess_type == 'client'}">
 				<c:forEach items="${listeStations}" var="station">
-				['<c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/>', 
+				['<c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
 					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>],</c:forEach></c:if>
 				];
 			

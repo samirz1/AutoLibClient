@@ -162,7 +162,7 @@ function Maps(initial_options) {
 			//marker.setTitle(global_data.places[i].nom);
 			this.global_maps_markersArray.push(marker);
 			
-			var contentMarker = '<div style="width:	200px; height: 40px;">'+this.global_data.places[i].nom+'</div>';
+			var contentMarker = '<div style="width:	250px; height: 60px;">'+this.global_data.places[i].nom+'</div>';
 
 			var infoWindow = new google.maps.InfoWindow({
 				content  : contentMarker,

@@ -49,6 +49,20 @@
 				}
 				m1.refresh();
 				</script>
+				
+				<table cellspacing="10">
+					<caption class="b left">Légende</caption>
+					<tr>
+						<td><img src="./img/car.png" alt="" /></td>
+						<td>Toutes les voitures sont disponibles (aucune place libre)</td>
+					</tr><tr>
+						<td><img src="./img/car-parking.png" alt="" /></td>
+						<td>Voitures et places disponibles</td>
+					</tr><tr>
+						<td><img src="./img/parking.png" alt="" /></td>
+						<td>Aucune voitures disponible (toutes les place sont libres)</td>
+					</tr>
+				</table>
             </div>
             
         </div>

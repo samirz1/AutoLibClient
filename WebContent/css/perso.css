@@ -99,3 +99,9 @@ img.ombre {
 		height: 	400px;
 	}	
 }
+caption.b {
+	font-weight:	bold;
+}
+caption.left {
+	text-align:		left;
+}

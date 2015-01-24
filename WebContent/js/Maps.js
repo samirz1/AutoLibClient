@@ -83,18 +83,25 @@ function Maps(initial_options) {
 		 * @param {String} type 'autocar' ou 'point' pour un point coloré ou éclairci
 		 * @return {string} url
 		 */
-		Maps.prototype.icon = function(number, type) {
-			if(number === undefined || number == -1) {
-				return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|C0C0C0|C0C0C0';
-				//return './inc/icon/marker.png';
-			} else {
-				var color = this.colors[number % this.colors.length];
-				if(type == 'autocar') {
+		Maps.prototype.icon = function(etat) {
+			
+				var image;
+				if(etat == 2) {
+					image = 'car';
+				} else if(image == 0)  {
+					image = 'parking';
+				} else {
+					image = 'car-parking';
+				}
+				//return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|C0C0C0|C0C0C0';
+				return './img/'+ image +'.png';
+				
+				/*var color = this.colors[number % this.colors.length];
+				if(type == 'type1') {
 					return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+number+'|'+color[0]+'|'+color[2]+'';
 				} else {
 					return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld='+number+'|'+color[1]+'|'+color[2]+'';
-				}
-			}
+				}*/
 		};
 				
 		/**
@@ -149,15 +156,15 @@ function Maps(initial_options) {
 		 */
 		Maps.prototype.set_place = function(location, i) {
 
-			var icon = this.icon();
+			var icon = this.icon(this.global_data.places[i].etat);
 			
 			this.global_maps_bounds.extend(location);
 			this.global_maps_map.fitBounds(this.global_maps_bounds);
 			var marker = new google.maps.Marker({
 				map: this.global_maps_map,
-				position: location
+				position: location,
 				//animation: google.maps.Animation.DROP,
-				//icon: icon
+				icon: icon
 			});
 			//marker.setTitle(global_data.places[i].nom);
 			this.global_maps_markersArray.push(marker);
@@ -273,11 +280,11 @@ function Maps(initial_options) {
 			this.load_places();
 		};
 		
-		Maps.prototype.newPlace = function(pNom, pLongitude, pLatitude) {
-			return { latitude:pLatitude, longitude:pLongitude, nom:pNom };
+		Maps.prototype.newPlace = function(pNom, pLongitude, pLatitude, pEtat) {
+			return { latitude:pLatitude, longitude:pLongitude, nom:pNom, etat:pEtat };
 		};
-		Maps.prototype.addPlace = function(pNom, pLongitude, pLatitude) {
-			this.global_data.places.push(this.newPlace(pNom, pLongitude, pLatitude));
+		Maps.prototype.addPlace = function(pNom, pLongitude, pLatitude, pEtat) {
+			this.global_data.places.push(this.newPlace(pNom, pLongitude, pLatitude, pEtat));
 		};
 
 		/**

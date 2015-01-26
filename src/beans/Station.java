@@ -123,7 +123,7 @@ public class Station implements Serializable {
 	}
 	
 	/**
-	 * Nombre de bornes libres
+	 * Nombre de bornes occupées
 	 * @return int
 	 */
 	public int nbOccupees() {

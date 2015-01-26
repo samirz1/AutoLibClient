@@ -36,6 +36,7 @@ function Maps(initial_options) {
 	this.global_data = { places: [], total_distance: 0 };
 	this.global_delay_check;
 	this.id;
+	this.previousInfo = null;
 	
 	this.options_defaults = {
 		infosbulles: true,
@@ -169,7 +170,7 @@ function Maps(initial_options) {
 			//marker.setTitle(global_data.places[i].nom);
 			this.global_maps_markersArray.push(marker);
 			
-			var contentMarker = '<div style="width:	250px; height: 60px;">'+this.global_data.places[i].nom+'</div>';
+			var contentMarker = '<div style="width:	250px; height: 60px;" class="mapsinfobulle">'+this.global_data.places[i].nom+'</div>';
 
 			var infoWindow = new google.maps.InfoWindow({
 				content  : contentMarker,
@@ -183,6 +184,10 @@ function Maps(initial_options) {
 			google.maps.event.addListener(marker, 'click', function() {
 				if($this.options.infosbulles) {
 					infoWindow.open($this.global_maps_map, marker);
+					if($this.previousInfo !== null) {
+						$this.previousInfo.close();
+					}
+					$this.previousInfo = infoWindow;
 				}
 			});
 			

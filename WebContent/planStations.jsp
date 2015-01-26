@@ -39,7 +39,7 @@
 
 					<c:if test="${sess_type == 'client'}">
 				<c:forEach items="${listeStations}" var="station">
-				['<c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
+				['<button class="btn btn-primary" type="button" onclick="loc(\'./controleurReservation?action=reservationn&id=${station.getIdStation()}\');"><span class="glyphicon glyphicon-road" aria-hidden="true" title="Réserver"></span></button><c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
 					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>],</c:forEach></c:if>
 				];
 			

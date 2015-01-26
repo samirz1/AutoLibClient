@@ -21,7 +21,9 @@ public class ControleurStation extends SuperControleur {
 
 	@Override
 	protected String execution() throws Exception {
-
+		
+		checkLoggedin();
+		
 		String vue = "";
 		MyBoolean resultat = null;
 		String id = null;
@@ -40,6 +42,18 @@ public class ControleurStation extends SuperControleur {
 		case "plan":
 			List<Station> listeStationsPlan = Client.create().resource(WS + "serviceStation/toutRechercherComplet").get(new GenericType<List<Station>>(){});
 			request.setAttribute("listeStations", listeStationsPlan);
+			if(Session.isClient(session)) {
+				resultat =  Client.create().resource(WS + "serviceReservation/encours/" + Session.getClient(session).getIdClient()).get(MyBoolean.class);
+				if(resultat.isB()) {
+					request.setAttribute("resa_encours", true);
+					request.setAttribute("mapaction", "rendre");
+				} else {
+					request.setAttribute("resa_encours", false);
+					request.setAttribute("mapaction", "reserver");
+				}
+			} else if(Session.isAdmin(session)) {
+				request.setAttribute("mapaction", "modifier");
+			}
 			vue = "/planStations.jsp";
 			break;
 			

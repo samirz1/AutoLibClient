@@ -140,6 +140,29 @@ abstract public class SuperControleur extends HttpServlet {
 	}
 	
 	/**
+	 * Vérifier que l'utilisateur est connecté
+	 * @param exception false pour ne pas lever d'exception
+	 * @return boolean
+	 * @throws AccessException
+	 */
+	protected boolean checkLoggedin(boolean exception) throws AccessException {
+		boolean result = Session.isClient(this.session) || Session.isAdmin(session);
+		if(exception && !result) {
+			throw new AccessException("Vous devez être connecté pour accéder à cette fonction.");
+		}
+		return result;
+	}
+	
+	/**
+	 * Vérifier que l'utilisateur est connecté
+	 * @return boolean
+	 * @throws AccessException
+	 */
+	protected boolean checkLoggedin() throws AccessException {
+		return checkLoggedin(true);
+	}
+	
+	/**
 	 * Savoir si le controleur est appelé depuis une requête POST
 	 * @return boolean
 	 */

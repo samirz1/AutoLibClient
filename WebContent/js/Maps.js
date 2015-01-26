@@ -85,7 +85,7 @@ function Maps(initial_options) {
 		 * @return {string} url
 		 */
 		Maps.prototype.icon = function(etat) {
-			
+
 				var image;
 				if(etat == 2) {
 					image = 'car';
@@ -170,13 +170,25 @@ function Maps(initial_options) {
 			//marker.setTitle(global_data.places[i].nom);
 			this.global_maps_markersArray.push(marker);
 			
-			var contentMarker = '<div style="width:	250px; height: 60px;" class="mapsinfobulle">'+this.global_data.places[i].nom+'</div>';
+			var bouton = '';
+			switch(this.global_data.places[i].action) {
+			case 'reserver':
+				bouton = '<button class="btn btn-primary" type="button" onclick="loc(\'./controleurReservation?action=reservation&id='+ this.global_data.places[i].id +'\');"><span class="glyphicon glyphicon-road" aria-hidden="true" title="Réserver"></span></button>';
+				break;
+			case 'rendre':
+				bouton = '<button class="btn btn-primary" type="button" onclick="loc(\'./controleurReservation?action=rendre&id='+ this.global_data.places[i].id +'\');"><span class="glyphicon glyphicon-flag" aria-hidden="true" title="Rendre"></span></button>';
+				break;
+			case 'modifier':
+				bouton = '<button class="btn btn-warning" type="button" onclick="loc(\'./controleurStation?action=modification&id='+ this.global_data.places[i].id +'\');"><span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Modifier"></span></button>';
+				break;
+			}
+			var contentMarker = '<div style="width:	250px; height: 60px;" class="mapsinfobulle">' + bouton + this.global_data.places[i].nom + '</div>';
 
 			var infoWindow = new google.maps.InfoWindow({
 				content  : contentMarker,
 				position : location,
 				animation: google.maps.Animation.DROP,
-				disableAutoPan: true
+				disableAutoPan: false // true pour ne pas déplacer la vue
 			});
 			
 			var $this = this;
@@ -285,11 +297,11 @@ function Maps(initial_options) {
 			this.load_places();
 		};
 		
-		Maps.prototype.newPlace = function(pNom, pLongitude, pLatitude, pEtat) {
-			return { latitude:pLatitude, longitude:pLongitude, nom:pNom, etat:pEtat };
+		Maps.prototype.newPlace = function(pNom, pLongitude, pLatitude, pEtat, pAction, pId) {
+			return { latitude:pLatitude, longitude:pLongitude, nom:pNom, etat:pEtat, action:pAction, id:pId };
 		};
-		Maps.prototype.addPlace = function(pNom, pLongitude, pLatitude, pEtat) {
-			this.global_data.places.push(this.newPlace(pNom, pLongitude, pLatitude, pEtat));
+		Maps.prototype.addPlace = function(pNom, pLongitude, pLatitude, pEtat, pAction, pId) {
+			this.global_data.places.push(this.newPlace(pNom, pLongitude, pLatitude, pEtat, pAction, pId));
 		};
 
 		/**

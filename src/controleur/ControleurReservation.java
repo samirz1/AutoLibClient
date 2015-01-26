@@ -42,11 +42,41 @@ public class ControleurReservation extends SuperControleur {
 		
 		switch(action) {
 		case "liste":
+			checkAccessAdmin();
+			
 			List<Reservation> listeReservations = Client.create().resource(WS + "serviceReservation/toutRechercher").get(new GenericType<List<Reservation>>(){});
 			request.setAttribute("listeReservations", listeReservations);
 			vue = "/toutRechercherReservation.jsp";
 			break;
 			
+		case "reservation":
+			checkAccessClient();
+			
+			url  = Session.getClient(session).getIdClient() + "/";
+			url += request.getParameter("id");
+					
+			resultat = Client.create().resource(WS + "serviceReservation/reserver/" + url).get(MyBoolean.class);
+			if(resultat.isB()) {
+				setRedirection("./controleurStation?action=plan");
+			} else {
+				throw new Exception("Erreur lors de la réservation.");
+			}
+			break;
+			
+		case "rendre":
+			checkAccessClient();
+			
+			url  = Session.getClient(session).getIdClient() + "/";
+			url += request.getParameter("id");
+					
+			resultat = Client.create().resource(WS + "serviceReservation/rendre/" + url).get(MyBoolean.class);
+			if(resultat.isB()) {
+				setRedirection("./controleurStation?action=plan");
+			} else {
+				throw new Exception("Erreur pour rendre le véhicule.");
+			}
+			break;
+		/*	
 		case "creation":
 			vue = "/creationReservation.jsp";
 			if(isPost()) {
@@ -76,7 +106,7 @@ public class ControleurReservation extends SuperControleur {
 				// > aucune action spécifique
 			}
 			break;
-			
+
 		case "suppression":
 			vue = "/supprimerReservation.jsp";
 			idVehicule = request.getParameter("idVehicule");
@@ -98,7 +128,7 @@ public class ControleurReservation extends SuperControleur {
 				throw new Exception("Erreur de suppression de la Reservation.");
 			}
 			break;
-			
+
 		case "modification":
 			idVehicule = request.getParameter("idVehicule");
 			idClient = request.getParameter("idClient");
@@ -135,7 +165,7 @@ public class ControleurReservation extends SuperControleur {
 			Reservation reservation = Client.create().resource(WS + "serviceReservation/rechercher/" + idVehicule + "/" + idClient).get(Reservation.class);
 			request.setAttribute("resa", reservation);
 			break;
-			
+		*/	
 		default:
 			throw new Exception("Cette action ("+action+") n'est pas reconnue pour ce module.");
 		}

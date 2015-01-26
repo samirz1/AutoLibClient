@@ -29,23 +29,26 @@
 					</button>
 				</c:if>
 	
+				<c:if test="${sess_type == 'client'}">
+					<c:if test="${resa_encours}">
+						Vous avez actuellement un véhicule. Choisissez une station pour le dépôser.
+					</c:if>
+					<c:if test="${!resa_encours}">
+						Choisissez une station pour réserver un véhicule.
+					</c:if>
+				</c:if>
+	
 				<script type="text/javascript">
 				var places = [
-				
-				<c:if test="${sess_type == 'admin'}">
-				<c:forEach items="${listeStations}" var="station">
-				['<button class="btn btn-warning" type="button" onclick="loc(\'./controleurStation?action=modification&id=${station.getIdStation()}\');"><span class="glyphicon glyphicon-pencil" aria-hidden="true" title="Modifier"></span></button> <c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
-					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>],</c:forEach></c:if>
 
-					<c:if test="${sess_type == 'client'}">
 				<c:forEach items="${listeStations}" var="station">
-				['<button class="btn btn-primary" type="button" onclick="loc(\'./controleurReservation?action=reservationn&id=${station.getIdStation()}\');"><span class="glyphicon glyphicon-road" aria-hidden="true" title="Réserver"></span></button><c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
-					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>],</c:forEach></c:if>
+				['<c:out value="${station.getNumero()}"/> <c:out value="${station.getAdresse()}"/><br /><c:out value="${station.texteEtat()}" />', 
+					<c:out value="${station.getLongitude()}"/>,<c:out value="${station.getLatitude()}"/>,<c:out value="${station.getEtat()}" />,'<c:out value="${mapaction}" />',<c:out value="${station.getIdStation()}" />],</c:forEach>
 				];
 			
 				var m1 = new Maps({ infosbulles: true, itineraire: false });	
 				for(var p = 0 ; p < places.length ; p++) {
-					m1.addPlace(places[p][0], places[p][1], places[p][2]);
+					m1.addPlace(places[p][0], places[p][1], places[p][2], places[p][3], places[p][4], places[p][5]);
 				}
 				m1.refresh();
 				</script>

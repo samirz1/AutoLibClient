@@ -34,10 +34,12 @@ public class ControleurClient extends HttpServlet{
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
 			String dateNaissance = request.getParameter("dateNaissance");
+			String login = request.getParameter("login");
+			String pwd = request.getParameter("pwd");
 			//System.out.println("Creation : " + nom +  "  " + prenom + "  " + dateNaissance);
 			if(nom!=null && !nom.isEmpty() && prenom!=null && !prenom.isEmpty() && dateNaissance!=null && !dateNaissance.isEmpty()){
 				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceClient/creation/" + nom + "/" + prenom + "/" + dateNaissance).get(MyBoolean.class);
+						+ "AutoLibWebService/serviceClient/creation/" + nom + "/" + prenom + "/" + dateNaissance+ "/" + login+ "/" + pwd).get(MyBoolean.class);
 				if(resultat.isB()) request.setAttribute("message", "Creation du compte effectué");
 				else request.setAttribute("message", "Echec de la creation du compte");
 			}			
@@ -52,6 +54,7 @@ public class ControleurClient extends HttpServlet{
 			}
 			List<beans.Client> listeClients = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceClient/toutRechercher").get(new GenericType<List<beans.Client>>(){});
 			request.setAttribute("listeClients", listeClients);	
+			
 			this.getServletContext().getRequestDispatcher( "/supprimerClient.jsp" ).forward( request, response );
 			//System.out.println("SUP");
 		}else if(action != null && action.equals("modifier1")){
@@ -87,7 +90,7 @@ public class ControleurClient extends HttpServlet{
 			request.setAttribute("listeClients", listeClients);
 			this.getServletContext().getRequestDispatcher( "/toutRechercherClient.jsp" ).forward( request, response );
 		}else{
-			System.out.println("PAGE NON TROUVER");
+			System.out.println("PAGE NON TROUVEE");
 		}
 	}	
 	

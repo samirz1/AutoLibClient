@@ -3,9 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
+<title>AutoLib - Projet</title>
+<jsp:include page="inc/head.jsp"></jsp:include>
+<script type="text/javascript" src="js/Maps.js"></script>
 </head>
-<body>
+<body class="background">
+	
+	<jsp:include page="inc/top.jsp"></jsp:include>
+
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+        
+        <div class="page">
+                
+            <div class="row">
 	<h1>Supprimer un vehicule</h1>
 	<form method="get" action="controleurVehicule">
 		<select class="dropdown-menu" role="menu" name="selectedVehicule">
@@ -20,6 +32,15 @@
 	</form>
 	<br/>
 	<core:out value="${message}"/>
+	   </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    <jsp:include page="inc/bottom.jsp"></jsp:include>
 </body>
+
 </html>
 

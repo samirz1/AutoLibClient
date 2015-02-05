@@ -19,62 +19,109 @@ import beans.MyBoolean;
 import beans.Vehicule;
 
 @WebServlet("/controleurVehicule")
-public class ControleurVehicule extends HttpServlet{
+public class ControleurVehicule extends SuperControleur {
 
 	private static final long serialVersionUID = 1L;
 	private String idVehicule;
 
 	public ControleurVehicule() {
-        super();
+		super();
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");// on récupére le type d'action
-		if (action != null && action.equals("creation")) {
-			if(request.getParameter("typeVehicule")!=null && request.getParameter("station")!=null
-					&& request.getParameter("idBorne")!=null ){
-				Integer typeVehicule = Integer.parseInt(request.getParameter("typeVehicule"));
-				Integer station = Integer.parseInt(request.getParameter("station"));
-				Integer idBorne = Integer.parseInt(request.getParameter("idBorne"));
-				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceVehicule/creation/" + typeVehicule + "/" + station + "/" + idBorne).get(MyBoolean.class);
-				if(resultat.isB()) {
-					request.setAttribute("message", "Creation du véhicule effectué");
+	protected String execution() throws Exception {
+
+		checkLoggedin();
+
+		String vue = "";
+		MyBoolean resultat = null;
+		String id = null;
+		List<beans.Vehicule> listeVehicules=null;
+
+		if (action == null) {
+			throw new Exception("Argument action manquant dans l'URL.");
+		}
+
+		switch (action) {
+		case "creation":
+			if (request.getParameter("typeVehicule") != null
+					&& request.getParameter("station") != null
+					&& request.getParameter("idBorne") != null) {
+				Integer typeVehicule = Integer.parseInt(request
+						.getParameter("typeVehicule"));
+				Integer station = Integer.parseInt(request
+						.getParameter("station"));
+				Integer idBorne = Integer.parseInt(request
+						.getParameter("idBorne"));
+				resultat = Client
+						.create()
+						.resource(
+								"http://localhost:8080/"
+										+ "AutoLibWebService/serviceVehicule/creation/"
+										+ typeVehicule + "/" + station + "/"
+										+ idBorne).get(MyBoolean.class);
+				if (resultat.isB()) {
+					request.setAttribute("message",
+							"Creation du véhicule effectué");
+				} else {
+					request.setAttribute("message",
+							"Echec de la creation du véhicule");
 				}
-				else {
-					request.setAttribute("message", "Echec de la creation du véhicule");
-				}
-			}	
-			this.getServletContext().getRequestDispatcher( "/creationVehicule.jsp" ).forward( request, response );
-		}else if(action != null && action.equals("supprimer")){
-			String idVehicule = request.getParameter("selectedVehicule");
-			if(idVehicule!=null && !idVehicule.isEmpty()){
-				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceVehicule/supprimer/" + idVehicule).get(MyBoolean.class);
-				if(resultat.isB()) request.setAttribute("message", "Supression du véhicule effectué");
-				else request.setAttribute("message", "Echec de la suppression du véhicule");
 			}
-			List<beans.Vehicule> listeVehicules = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
-			request.setAttribute("listeVehicules", listeVehicules);	
-			this.getServletContext().getRequestDispatcher( "/supprimerVehicule.jsp" ).forward( request, response );
-		}else if(action != null && action.equals("rechercher1")){
+			vue = "/creationVehicule.jsp";
+			break;
+		case "supprimer":
 			String idVehicule = request.getParameter("selectedVehicule");
+			if (idVehicule != null && !idVehicule.isEmpty()) {
+				resultat = Client
+						.create()
+						.resource(
+								"http://localhost:8080/"
+										+ "AutoLibWebService/serviceVehicule/supprimer/"
+										+ idVehicule).get(MyBoolean.class);
+				if (resultat.isB())
+					request.setAttribute("message",
+							"Supression du véhicule effectué");
+				else
+					request.setAttribute("message",
+							"Echec de la suppression du véhicule");
+			}
+			listeVehicules = Client
+					.create()
+					.resource(
+							"http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher")
+					.get(new GenericType<List<beans.Vehicule>>() {
+					});
+			request.setAttribute("listeVehicules", listeVehicules);
+			vue = "/supprimerVehicule.jsp";
+			break;
+		case "rechercher1":
+			idVehicule = request.getParameter("selectedVehicule");
 			this.idVehicule = idVehicule;
-			if(idVehicule!=null && !idVehicule.isEmpty()){
-				beans.Vehicule resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceClient/rechercher/" + idVehicule).get(beans.Vehicule.class);
+			if (idVehicule != null && !idVehicule.isEmpty()) {
+				beans.Vehicule resultatVehicule = Client
+						.create()
+						.resource(
+								"http://localhost:8080/"
+										+ "AutoLibWebService/serviceClient/rechercher/"
+										+ idVehicule).get(beans.Vehicule.class);
 			}
-			this.getServletContext().getRequestDispatcher( "/affichageVehicule.jsp" ).forward( request, response );
-		}else if(action != null && action.equals("rechercher2")){
+			vue = "/affichageVehicule.jsp";
+			break;
+		case "rechercher2":
 			String idBorne = request.getParameter("idBorne");
-			if(idBorne!=null && !idBorne.isEmpty()){
-				beans.Vehicule resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceClient/rechercherVehiculeBorne/" + idBorne).get(beans.Vehicule.class);
+			if (idBorne != null && !idBorne.isEmpty()) {
+				beans.Vehicule resultatVehicule = Client
+						.create()
+						.resource(
+								"http://localhost:8080/"
+										+ "AutoLibWebService/serviceClient/rechercherVehiculeBorne/"
+										+ idBorne).get(beans.Vehicule.class);
 			}
-			this.getServletContext().getRequestDispatcher( "/affichageVehicule.jsp" ).forward( request, response );
-		}else if(action != null && action.equals("modifier")){
-			String idVehicule = request.getParameter("idVehicule");
+			vue = "/affichageVehicule.jsp";
+			break;
+		case "modifier":
+			idVehicule = request.getParameter("idVehicule");
 			String ancienIdBorne = request.getParameter("ancienIdBorne");
 			String nouveauIdBorne = request.getParameter("nouveauIdBorne");
 			String NouveauStation = request.getParameter("NouveauStation");
@@ -82,28 +129,46 @@ public class ControleurVehicule extends HttpServlet{
 			String etatBatterie = request.getParameter("etatBatterie");
 			String Disponibilite = request.getParameter("Disponibilite");
 			String type_vehicule = request.getParameter("type_vehicule");
-			if(idVehicule !=null){
-				MyBoolean resultat = Client.create().resource("http://localhost:8080/"
-						+ "AutoLibWebService/serviceVehicule/modifier/" + idVehicule+"/"+ancienIdBorne+"/"+nouveauIdBorne+
-						"/"+NouveauStation+"/"+RFID+"/"+etatBatterie+"/"+Disponibilite+"/"+type_vehicule).get(MyBoolean.class);
-				if(resultat.isB()) {
-					request.setAttribute("message", "Modification du véhicule effectué");
-				}
-				else {
-					request.setAttribute("message", "Echec de la modification du véhicule");
+			if (idVehicule != null) {
+				resultat = Client
+						.create()
+						.resource(
+								"http://localhost:8080/"
+										+ "AutoLibWebService/serviceVehicule/modifier/"
+										+ idVehicule + "/" + ancienIdBorne
+										+ "/" + nouveauIdBorne + "/"
+										+ NouveauStation + "/" + RFID + "/"
+										+ etatBatterie + "/" + Disponibilite
+										+ "/" + type_vehicule)
+						.get(MyBoolean.class);
+				if (resultat.isB()) {
+					request.setAttribute("message",
+							"Modification du véhicule effectué");
+				} else {
+					request.setAttribute("message",
+							"Echec de la modification du véhicule");
 				}
 			}
-			List<beans.Vehicule> listeVehicules = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
-			request.setAttribute("listeVehicules", listeVehicules);	
-			this.getServletContext().getRequestDispatcher( "/modifierVehicule.jsp" ).forward( request, response );
-		}
-		else if(action != null && action.equals("toutRechercher")){
-			List<beans.Vehicule> listeVehicules = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher").get(new GenericType<List<beans.Vehicule>>(){});
+			listeVehicules = Client
+					.create()
+					.resource(
+							"http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher")
+					.get(new GenericType<List<beans.Vehicule>>() {
+					});
 			request.setAttribute("listeVehicules", listeVehicules);
-			this.getServletContext().getRequestDispatcher( "/toutRechercherVehicule.jsp" ).forward( request, response );
-		}else{
-			System.out.println("PAGE NON TROUVEE");
+			vue = "/modifierVehicule.jsp";
+			break;
+		case "toutRechercher":
+			listeVehicules = Client
+					.create()
+					.resource(
+							"http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher")
+					.get(new GenericType<List<beans.Vehicule>>() {
+					});
+			request.setAttribute("listeVehicules", listeVehicules);
+			vue = "/toutRechercherVehicule.jsp";
+			break;
 		}
+		return vue;
 	}
 }
-

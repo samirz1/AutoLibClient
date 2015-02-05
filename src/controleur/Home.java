@@ -51,7 +51,6 @@ public class Home extends SuperControleur {
 					if(resultat.isB()) {
 						
 						beans.Client client = Client.create().resource(WS + "serviceClient/rechercher/login/" + urlLogin + "/").get(beans.Client.class);
-						client.setIdClient(1);
 						Session.loginClient(session, client.getIdClient()); // OK !
 						Session.setClient(session, client);
 						request.setAttribute("autoredirect", true);

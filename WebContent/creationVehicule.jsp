@@ -20,19 +20,53 @@
 
 					<div class="row">
 						<h1>Creation d'un Vehicule</h1>
-						<form method="get" action="controleurVehicule">
-							<label>Station </label> <input type="text" id="station"
-								name="station" value="" size="5" maxlength="5" /> <br /> <label>idBorne
-							</label> <input type="text" id="idBorne" name="idBorne" value=""
-								size="20" maxlength="20" /> <br /> <label>typeVehicule
-							</label> <input type="text" id="typeVehicule" name="typeVehicule"
-								value="" size="20" maxlength="20" /> <br /> <br />
-							<button type="submit" />
-							Valider
-							</button>
-							<input type="hidden" name="action" value="creation">
+						<c:out value="${message}" />
+						<form method="post" action="controleurVehicule" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="station">Station </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="station" name="station" value="" size="5" maxlength="5" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="idBorne">Borne </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="idBorne" name="idBorne" value="" size="5" maxlength="5" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="typeVehicule">Type de véhicule </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="typeVehicule" name="typeVehicule" value="" size="5" maxlength="5" />
+						    </div>
+					    </div><input type="hidden" name="action" value="creation" />
+				    
+					    <div class="form-group">
+	                   		<div class="col-sm-offset-2 col-sm-10">
+	                   			<button
+									class="btn btn-success" type="submit">
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" title="Enregistrer"></span> Enregistrer
+								</button>
+	                   			<button
+									class="btn btn-info" type="reset">
+										<span class="glyphicon glyphicon-refresh" aria-hidden="true" title="Réinitialiser"></span>
+								</button>
+	                   		</div>
+	                    </div>
 						</form>
-						<core:out value="${message}" />
-						<jsp:include page="inc/bottom.jsp"></jsp:include>
+						
+   				<br /><br />
+   				<a href="./controleurVehicule?action=toutRechercher">Retour</a>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    <jsp:include page="inc/bottom.jsp"></jsp:include>
+
 </body>
 </html>

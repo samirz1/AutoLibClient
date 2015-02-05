@@ -15,7 +15,6 @@
           
           <c:if test="${sess_type == 'client'}">
           	<li <c:if test="${url == 'stations'}">class="active"</c:if>><a href="./controleurStation?action=plan">Plan des stations</a></li>
-            <li <c:if test="${url == 'reservation'}">class="active"</c:if>><a href="./reservation">Réservations</a></li>
           </c:if>
           <c:if test="${sess_type == 'admin'}">
           	<li <c:if test="${url == 'stations'}">class="active"</c:if>><a href="./controleurStation?action=plan">Plan des stations</a></li>

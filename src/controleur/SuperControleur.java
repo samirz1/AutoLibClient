@@ -64,6 +64,7 @@ abstract public class SuperControleur extends HttpServlet {
 		if(this.redirection != null) {
 			// effectuer une redirection si elle a été demandée
 			this.response.sendRedirect(redirection);
+			this.setRedirection(null);
 			
 		} else if(view != null) {
 			

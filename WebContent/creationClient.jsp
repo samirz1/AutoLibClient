@@ -20,23 +20,79 @@
 
 					<div class="row">
 						<h1>Creation d'un compte client</h1>
-						<form method="get" action="controleurClient">
-						<label>Login </label> <input type="text" id="login" name="login"
-								value="" size="20" maxlength="20" /> <br /> 
-								<label>Pwd </label> <input type="password" id="pwd" name="pwd"
-								value="" size="20" maxlength="20" /> <br /> 
-							<label>Nom </label> <input type="text" id="nom" name="nom"
-								value="" size="20" maxlength="20" /> <br /> <label>Prenom
-							</label> <input type="text" id="prenom" name="prenom" value="" size="20"
-								maxlength="20" /> <br /> <label>Date Naissance </label> <input
-								type="text" id="dateNaissance" name="dateNaissance" value=""
-								size="20" maxlength="20" /> <br /> <br />
-							<button type="submit" />
-							Valider
-							</button>
-							<input type="hidden" name="action" value="creation">
+						
+						<c:out value="${message}" />
+						
+						<form method="post" action="controleurClient" class="form-horizontal" role="form">
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="numero">Login </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="login" name="login" value="${cli.getLogin()}" size="20" maxlength="80" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="numero">Mot de passe </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="pwd" name="pwd" value="${cli.getPwd()}" size="20" maxlength="150" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="nom">Nom </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="nom" name="nom" value="${cli.getNom()}" size="20" maxlength="150" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="prenom">Prénom </label>
+							<div class="col-sm-10">
+						    	<input type="text" id="prenom" name="prenom" value="${cli.getPrenom()}" size="20" maxlength="150" />
+						    </div>
+					    </div>
+					    
+					    <div class="form-group">
+							<label class="control-label col-sm-2" for="dateNaissance">Date de naissance </label>
+							<div class="col-sm-10">
+						    	<input type="text" placeholder="AAAA-MM-JJ" id="dateNaissance" name="dateNaissance" data-provide="datepicker" data-date-format="yyyy-mm-dd" class="datepicker" value="${cli.getDateNaissanceString()}" size="20" maxlength="150" />
+						    </div>
+					    </div>
+					    
+					    <input type="hidden" name="action" value="creation" />
+				    
+					    <div class="form-group">
+	                   		<div class="col-sm-offset-2 col-sm-10">
+	                   			<button
+									class="btn btn-success" type="submit">
+										<span class="glyphicon glyphicon-ok" aria-hidden="true" title="Enregistrer"></span> Enregistrer
+								</button>
+	                   			<button
+									class="btn btn-info" type="reset">
+										<span class="glyphicon glyphicon-refresh" aria-hidden="true" title="Réinitialiser"></span>
+								</button>
+	                   		</div>
+	                    </div>
+						<script type="text/javascript">
+						$('.datepicker').datepicker({
+							 startView: 2,
+							 language: "fr"
+						});
+						</script>
+						
 						</form>
-						<core:out value="${message}" />
-						<jsp:include page="inc/bottom.jsp"></jsp:include>
+						
+   				<br /><br />
+   				<a href="./controleurClient?action=liste">Retour</a>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    <jsp:include page="inc/bottom.jsp"></jsp:include>
+
 </body>
 </html>

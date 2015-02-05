@@ -7,10 +7,13 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/home.css" rel="stylesheet" type="text/css" />
 	<link href="css/perso.css" rel="stylesheet" />
+	<link href="css/datepicker3.css" rel="stylesheet" />
 	
 	<!-- Librairies -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/locales/bootstrap-datepicker.fr.js"></script>
 	
 	<!-- Select2 pour les listes déroulantes avancées -->
 	<link href="select2/select2.css" rel="stylesheet"/>

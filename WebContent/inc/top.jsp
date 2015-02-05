@@ -18,7 +18,7 @@
           </c:if>
           <c:if test="${sess_type == 'admin'}">
           	<li <c:if test="${url == 'stations'}">class="active"</c:if>><a href="./controleurStation?action=plan">Plan des stations</a></li>
-          	<li <c:if test="${url == 'clients'}">class="active"</c:if>><a href="./controleurClient?action=toutRechercher">Clients</a></li>
+          	<li <c:if test="${url == 'clients'}">class="active"</c:if>><a href="./controleurClient?action=liste">Clients</a></li>
           	<li <c:if test="${url == 'vehicules'}">class="active"</c:if>><a href="./controleurVehicule?action=toutRechercher">Véhicules</a></li>
           </c:if>
          	<li class="dropdown">

@@ -18,9 +18,8 @@ import com.sun.jersey.api.client.GenericType;
 import beans.MyBoolean;
 
 @WebServlet("/controleurClient")
-public class ControleurClient extends HttpServlet{
+public class ControleurClient extends SuperControleur {
 
-	private static final long serialVersionUID = 1L;
 	private String idClient;
 
 	public ControleurClient() {
@@ -28,8 +27,84 @@ public class ControleurClient extends HttpServlet{
 	}
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");// on récupére le type d'action
+	protected String execution() throws Exception {
+
+		checkAccessAdmin();
+		
+		String vue = "";
+		MyBoolean resultat = null;
+		String id = null;
+			
+		if(action == null) {
+			throw new Exception("Argument action manquant dans l'URL.");
+		}
+		
+		switch(action) {
+		case "toutRechercher":
+		case "liste":
+			List<beans.Client> listeClients = Client.create().resource(WS + "serviceClient/toutRechercher").get(new GenericType<List<beans.Client>>(){});
+			request.setAttribute("listeClients", listeClients);
+			vue = "/toutRechercherClient.jsp";
+		break;
+			
+		case "creation":
+			String nom = request.getParameter("nom");
+			String prenom = request.getParameter("prenom");
+			String dateNaissance = request.getParameter("dateNaissance");
+			String login = request.getParameter("login");
+			String pwd = request.getParameter("pwd");
+			
+			if(isPost() && nom!=null && !nom.isEmpty() && prenom!=null && !prenom.isEmpty() && dateNaissance!=null && !dateNaissance.isEmpty()){
+				resultat = Client.create().resource(WS + "serviceClient/creation/" + nom + "/" + prenom + "/" + dateNaissance+ "/" + login+ "/" + pwd).get(MyBoolean.class);
+				if(resultat.isB()){ 
+					request.setAttribute("message", "Creation du compte effectuée.");
+				} else {
+					request.setAttribute("message", "Echec de la creation du compte.");
+				}
+			}			
+			vue = "/creationClient.jsp";
+		break;
+		
+		case "suppression":
+			id = request.getParameter("idClient");
+			if(id!=null && !id.isEmpty()){
+				resultat = Client.create().resource(WS + "serviceClient/supprimer/" + id).get(MyBoolean.class);
+				if(resultat.isB()) {
+					request.setAttribute("message", "Supression du compte effectuée.");
+				} else {
+					throw new Exception("Echec de la suppression du compte.");
+				}
+			}
+			setRedirection("controleurClient?action=liste");
+		break;
+		
+		case "modification":
+			id = request.getParameter("idClient");
+			if(isPost()) {
+				String nom2 = request.getParameter("nom");
+				String prenom2 = request.getParameter("prenom");
+				String dateNaissance2 = request.getParameter("dateNaissance");
+				String login2 = request.getParameter("login");
+				String pwd2 = request.getParameter("pwd");
+				
+				resultat = Client.create().resource(WS + "serviceClient/modifier/" + id +"/"+nom2+"/"+prenom2+"/"+dateNaissance2+"/"+login2+"/"+pwd2).get(MyBoolean.class);
+				if(resultat.isB()) {
+					request.setAttribute("message", "Modification du compte effectuée.");
+				} else {
+					throw new Exception("Echec de la modification du compte.");
+				}
+			}
+			if(id!=null && !id.isEmpty()){
+				beans.Client client = Client.create().resource(WS + "serviceClient/rechercher/" + id).get(beans.Client.class);
+				request.setAttribute("cli", client);
+			}
+			vue = "/modifierClient.jsp";
+		break;
+		}
+		
+		return vue;
+		
+		/*
 		if (action != null && action.equals("creation")) {
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -86,12 +161,10 @@ public class ControleurClient extends HttpServlet{
 			request.setAttribute("listeClients", listeClients);	
 			this.getServletContext().getRequestDispatcher( "/modifierClient.jsp" ).forward( request, response );
 		}else if(action != null && action.equals("toutRechercher")){
-			List<beans.Client> listeClients = Client.create().resource("http://localhost:8080/AutoLibWebService/serviceClient/toutRechercher").get(new GenericType<List<beans.Client>>(){});
-			request.setAttribute("listeClients", listeClients);
-			this.getServletContext().getRequestDispatcher( "/toutRechercherClient.jsp" ).forward( request, response );
+			
 		}else{
 			System.out.println("PAGE NON TROUVEE");
-		}
+		}*/
 	}	
 	
 }

@@ -89,7 +89,7 @@ function Maps(initial_options) {
 				var image;
 				if(etat == 2) {
 					image = 'car';
-				} else if(image == 0)  {
+				} else if(etat == 0)  {
 					image = 'parking';
 				} else {
 					image = 'car-parking';

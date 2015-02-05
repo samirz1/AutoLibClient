@@ -71,7 +71,7 @@ public class ControleurVehicule extends SuperControleur {
 			vue = "/creationVehicule.jsp";
 			break;
 		case "supprimer":
-			String idVehicule = request.getParameter("selectedVehicule");
+			String idVehicule = request.getParameter("idVehicule");
 			if (idVehicule != null && !idVehicule.isEmpty()) {
 				resultat = Client
 						.create()
@@ -93,7 +93,7 @@ public class ControleurVehicule extends SuperControleur {
 					.get(new GenericType<List<beans.Vehicule>>() {
 					});
 			request.setAttribute("listeVehicules", listeVehicules);
-			vue = "/supprimerVehicule.jsp";
+			vue = "/toutRechercherVehicule.jsp";
 			break;
 		case "rechercher1":
 			idVehicule = request.getParameter("selectedVehicule");
@@ -129,7 +129,7 @@ public class ControleurVehicule extends SuperControleur {
 			String etatBatterie = request.getParameter("etatBatterie");
 			String Disponibilite = request.getParameter("Disponibilite");
 			String type_vehicule = request.getParameter("type_vehicule");
-			if (idVehicule != null) {
+			if (ancienIdBorne != null) {
 				resultat = Client
 						.create()
 						.resource(
@@ -149,13 +149,13 @@ public class ControleurVehicule extends SuperControleur {
 							"Echec de la modification du véhicule");
 				}
 			}
-			listeVehicules = Client
+			beans.Vehicule resultatVehicule = Client
 					.create()
 					.resource(
-							"http://localhost:8080/AutoLibWebService/serviceVehicule/toutRechercher")
-					.get(new GenericType<List<beans.Vehicule>>() {
-					});
-			request.setAttribute("listeVehicules", listeVehicules);
+							"http://localhost:8080/"
+									+ "AutoLibWebService/serviceVehicule/rechercher/"
+									+ idVehicule).get(beans.Vehicule.class);
+			request.setAttribute("vehicule", resultatVehicule);
 			vue = "/modifierVehicule.jsp";
 			break;
 		case "toutRechercher":
